@@ -72,7 +72,6 @@ int validate_cc(long cc_number) {
         aux *= 10;
         aux_b *= 10;
     }
-    printf("%lu checksum: %d ", cc_number, sum);
     if (sum % 10 == 0)
     {
       // Doesn't have the appropiate length
