@@ -1,26 +1,23 @@
 #include <stdio.h>
-//#include <cs50.h>
+#include <cs50.h>
 
 #define AMEX "AMEX\n"
 #define MASTERCARD "MASTERCARD\n"
 #define VISA "VISA\n"
 #define INVALID "INVALID\n"
 #define MAX_LENGTH 16
-//#define MAX_CC_NUMS 11
 
-//const long CREDIT_CARD_NUMBERS[MAX_CC_NUMS] = {
-//  378282246310005,    // AMEX
-//  371449635398431,    // AMEX
-//  5555555555554444,   // MASTERCARD
-//  5105105105105100,   // MASTERCARD
-//  4111111111111111,   // VISA
-//  4012888888881881,   // VISA
-//  1234567890,         // INVALID
-//  369421438430814,    // INVALID
-//  4062901840,         // INVALID
-//  5673598276138003,   // INVALID
-//  4111111111111113,   // INVALID
-//};
+// 378282246310005      // AMEX
+// 371449635398431      // AMEX
+// 5555555555554444     // MASTERCARD
+// 5105105105105100     // MASTERCARD
+// 4111111111111111     // VISA
+// 4012888888881881     // VISA
+// 1234567890           // INVALID
+// 369421438430814      // INVALID
+// 4062901840           // INVALID
+// 5673598276138003     // INVALID
+// 4111111111111113     // INVALID
 
 int validate_cc(long cc_number);
 
@@ -29,11 +26,6 @@ int main(void)
 {
     long cc_number = get_long("Introduce the card number: ");
     validate_cc(cc_number);
-    //printf("\n");
-    //for (int i = 0; i < MAX_CC_NUMS; i++)
-    //{
-    //  validate_cc(CREDIT_CARD_NUMBERS[i]);
-    //}
     return 0;
 }
 
