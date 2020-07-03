@@ -21,7 +21,6 @@
 
 int validate_cc(long cc_number);
 
-// TODO Use functions, find a way to get the first 4 numbers (struc? array?)
 int main(void)
 {
     long cc_number = get_long("Introduce the card number: ");
