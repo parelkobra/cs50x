@@ -74,32 +74,28 @@ bool vote(string name)
             return true;
         }
     }
+
     return false;
 }
 
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    candidate winners[MAX];
-    winners[0] = candidates[0];
-    
-    int win_i = 0; 
-    
-    for (int i = 1; i < candidate_count; i++)
+    int highest_vote = 0;
+    for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].votes > winners[win_i].votes)
+        if (candidates[i].votes > highest_vote)
         {
-            winners[0] = candidates[i];
-        }
-        else if (candidates[i].votes == winners[win_i].votes)
-        {
-            winners[++win_i] = candidates[i];
+            highest_vote = candidates[i].votes;
         }
     }
 
-    for (int i = 0; i < win_i + 1; i++)
+    for (int i = 0; i < candidate_count; i++)
     {
-        printf("%s\n", winners[i].name);
+        if (candidates[i].votes == highest_vote)
+        {
+            printf("%s\n", candidates[i].name);
+        }
     }
 
     return;
