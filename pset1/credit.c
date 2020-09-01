@@ -28,45 +28,40 @@ int main(void)
     return 0;
 }
 
-int validate_cc(long cc_number) {
+int validate_cc(long cc_number)
+{
     int first_digit, second_digit, third_digit, fourth_digit;
-    long aux = 10;
-    long aux_b = 1;
+    long aux = 10, aux_b = 1;
     int sum = 0;
+
     for (int i = 0; i < MAX_LENGTH; i++)
     {
         long remainder = cc_number % aux;
         int digit = remainder / aux_b;
 
-        /* I get the first, second and third digits of the credit card
-         * number. That way I will be able to tell the length (?) of
-         * the credit card number, and whether it's American Express,
-         * MasterCard or Visa.
-         */
         switch (i)
         {
-          case 12:
-            fourth_digit = digit;
-            break;
-          case 13:
-            third_digit = digit;
-            break;
-          case 14:
-            second_digit = digit;
-            break;
-          case 15:
-            first_digit = digit;
-            break;
+            case 12:
+                fourth_digit = digit;
+                break;
+            case 13:
+                third_digit = digit;
+                break;
+            case 14:
+                second_digit = digit;
+                break;
+            case 15:
+                first_digit = digit;
+                break;
         }
 
         if (i % 2 != 0)
         {
             digit = digit * 2;
             if (digit > 9)
-            {
-              digit = digit / 10 + digit % 10;
-            }
+                digit = digit / 10 + digit % 10;
         }
+
         sum += digit;
         aux *= 10;
         aux_b *= 10;
@@ -75,36 +70,27 @@ int validate_cc(long cc_number) {
     {
       // Doesn't have the appropiate length
       if (first_digit == 0 && second_digit == 0 && third_digit == 0 && fourth_digit == 0)
-      {
         printf(INVALID);
-      }
+
       // It has 13 digits and the first one is 4
       else if (first_digit == 0 && second_digit == 0 && third_digit == 0 && fourth_digit == 4)
-      {
         printf(VISA);
-      }
+
       // It has 15 digits and starts by 34 or 37
       else if (first_digit == 0 && second_digit == 3 && (third_digit == 4 || third_digit == 7))
-      {
         printf(AMEX);
-      }
+
       // It has 16 digits and starts between 51 and 55
       else if (first_digit == 5 && second_digit >= 1 && second_digit <= 5)
-      {
         printf(MASTERCARD);
-      }
+
       // It has 16 digits and starts by 4
       else if (first_digit == 4)
-      {
         printf(VISA);
-      }
+
       else
-      {
         printf(INVALID);
-      }
     }
     else
-    {
       printf(INVALID);
-    }
 }
