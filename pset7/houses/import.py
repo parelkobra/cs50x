@@ -1,14 +1,15 @@
 #!/usr/bin/python
 
-import cs50
 import csv
+import sqlite3
 import sys
 
 if len(sys.argv) != 2:
     print(f"Usage: {sys.argv[0]} CSV_FILE")
     exit(1)
 
-con = cs50.SQL("sqlite:///students.db")
+connection = sqlite3.connect('students.db')
+cursor = connection.cursor();
 
 insert_query = "INSERT INTO students (first, middle, last, house, birth) VALUES (?, ?, ?, ?, ?)"
 
@@ -31,7 +32,10 @@ try:
 
             fields = [first_name, middle_name, last_name, house, birth]
 
-            con.execute(insert_query, fields)
+            cursor.execute(insert_query, fields)
+
+        connection.commit();
+        connection.close();
 
 except FileNotFoundError as e:
     print(e.strerror)

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import cs50
+import sqlite3
 import sys
 
 houses = ("Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin")
@@ -17,12 +17,16 @@ if sys.argv[1] not in houses:
 
 house = sys.argv[1]
 
-con = cs50.SQL("sqlite:///students.db")
+connection = sqlite3.connect('students.db')
+cursor = connection.cursor();
 
-students = con.execute(select_query, house)
+cursor.execute(select_query, (house,))
+students = cursor.fetchall();
 
 for student in students:
-    if student["middle"] is not None:
-        print(f"{student['first']} {student['middle']} {student['last']}, born {student['birth']}")
+    if student[1] is not None:
+        print(f"{student[0]} {student[1]} {student[2]}, born {student[3]}")
     else:
-        print(f"{student['first']} {student['last']}, born {student['birth']}")
+        print(f"{student[0]} {student[2]}, born {student[3]}")
+
+connection.close();
