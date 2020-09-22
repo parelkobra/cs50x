@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/612b35008b.js" crossorigin="anonymous"></script>
+        <title>My Webpage</title>
+		<!-- Prevents css transition from firing after page load -->
+		<script> </script>
+    </head>
+    <body>
+		<header>
+            <ul id="navigation">
+                <li>
+					<a class="active" href="index.html">About me</a>
+				</li>
+                <li>
+					<a href="random-video.html">Random video</a>
+				</li>
+                <li>
+					<a href="animation.html">ThreeJS animation</a>
+				</li>
+                <li>
+					<a href="search.html">Search</a>
+				</li>
+            </ul>
+        </header>
+		<div id="main">
+			<div id="whoami">
+				<h2>About me</h2>
+				<p>Hello! My name is David, I'm from Spain and I have spent <span id="days"></span> days on earth. I like playing with software, learning about unix based systems, politics, and cycling.</p>
+				<p>Some languages and tools I was already familiar with before I started cs50 are:</p>
+				<table style="width: 100%;">
+					<tr>
+						<td><b>Language/Tool</b></td>
+						<td><b>Proficiency</b></td>
+					</tr>
+					<tr>
+						<td>Bash</td>
+						<td>3/5</td>
+					</tr>
+					<tr>
+						<td>CSS</td>
+						<td>3/5</td>
+					</tr>
+					<tr>
+						<td>Git</td>
+						<td>3/5</td>
+					</tr>
+					<tr>
+						<td>HTML</td>
+						<td>5/5</td>
+					</tr>
+					<tr>
+						<td>Java</td>
+						<td>5/5</td>
+					</tr>
+					<tr>
+						<td>JavaScript</td>
+						<td>4/5</td>
+					</tr>
+					<tr>
+						<td>Linux</td>
+						<td>4/5</td>
+					</tr>
+					<tr>
+						<td>MongoDB</td>
+						<td>3/5</td>
+					</tr>
+					<tr>
+						<td>SQL</td>
+						<td>4/5</td>
+					</tr>
+				</table>
+				</ul>
+				<p>This is the first assignment of the pset8 from <a href="https://cs50.harvard.edu/x/2020/">Harvard's cs50x 2019/2020</a></p>
+				<hr>
+				<p>This page has been build with:</p>
+				<div id="img-row">
+					<img class="tech-img" id="html-img" src="media/html.svg" alt="html-img">
+					<img class="tech-img" id="css-img" src="media/css.svg" alt="css-img">
+					<img class="tech-img" id="js-img" src="media/js.svg" alt="js-img">
+				</div>
+				<hr>
+				<p>Here are some places you can find me:</p>
+				<a href="https://github.com/parelkobra" class="icon">
+					<i class="fab fa-github"></i>
+				</a>
+				<a href="mailto:ruiz.6789@gmail.com" class="icon">
+					<i class="fas fa-envelope"></i>
+				</a>
+			</div>
+		</div>
+		<footer>
+			<p>© 2020 David Ruiz.</p>
+		</footer>
+		<script>
+			(function() {
+
+				function getDaysAlive() {
+					const oneDay = 24 * 60 * 60 * 1000;
+					const now = new Date();
+					const birth = new Date(1997, 6, 20);
+
+					return Math.round(Math.abs((now - birth) / oneDay));
+				}
+
+				const days = getDaysAlive();
+
+				document.getElementById('days').innerHTML = days;
+
+			})();
+		</script>
+    </body>
+</html>
