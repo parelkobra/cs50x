@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <button type="button" class="btn btn-success" id="addCashBtn" data-toggle="modal" data-target="#addCashModal">
+        Add cash
+    </button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.symbol }}</td>
+                <td>{{ stock.name }}</td>
+                <td>{{ stock.shares }}</td>
+                <td>${{ stock.price }}</td>
+                <td>${{ stock.total }}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td>CASH</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ cash }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="addCashModal" tabindex="-1" role="dialog" aria-labelledby="addCashModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCashModalLabel">Add cash</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="cash-form" action="/cash" method="post">
+                        <div class="form-group">
+                            <label for="creditcard" class="col-form-label">Card number</label>
+                            <input id="creditcard" autocomplete="off" class="form-control" name="creditcard" type="number" step="any" required>
+                            <small id="ccHelp" class="form-text text-muted" style="margin-left: -65px;">The 16 digits on front of your (imaginary) card</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Expiration date
+                                <select class="form-control" name="month" required>
+                                {% for month in months %}
+                                    <option>{{ month }}</option>
+                                {% endfor %}
+                                </select>
+                                <select class="form-control" name="year" required>
+                                {% for year in years %}
+                                    <option>{{ year }}</option>
+                                {% endfor %}
+                                </select>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="cash">Cash</label>
+                            <input id="cash" autocomplete="off" class="form-control" name="cash" type="number" min="1" step="any" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" type="submit" form="cash-form">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

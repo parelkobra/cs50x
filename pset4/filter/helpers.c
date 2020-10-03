@@ -8,16 +8,13 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
     int rgbAvg = 0;
 
     for (int i = 0; i < height; i++)
-    {
         for (int j = 0; j < width; j++)
         {
             rgbAvg = round((image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed) / 3.0);
-
             image[i][j].rgbtBlue = rgbAvg;
             image[i][j].rgbtGreen = rgbAvg;
             image[i][j].rgbtRed = rgbAvg;
         }
-    }
 
     return;
 }
@@ -36,7 +33,6 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
             temp = image[i][j];
             image[i][j] = image[i][width - (j + 1)];
             image[i][width - (j + 1)] = temp;
-
             j++;
         }
     }
@@ -53,14 +49,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
     // Loop through each pixel
     for (int i = 0; i < height; i++)
-    {
         for (int j = 0; j < width; j++)
         {
             neighbors = 0, rgbtBlueSum = 0, rgbtGreenSum = 0, rgbtRedSum = 0;
 
             // Loop through the surrounding pixels of image[i][j]
             for (int k = -1; k < 2; k++)
-            {
                 for (int l = -1; l < 2; l++)
                 {
                     // Skip adjacent pixels that are out of the edges of the image
@@ -69,25 +63,21 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                         rgbtBlueSum += image[i + k][j + l].rgbtBlue;
                         rgbtGreenSum += image[i + k][j + l].rgbtGreen;
                         rgbtRedSum += image[i + k][j + l].rgbtRed;
+
                         neighbors++;
                     }
                 }
-            }
+
             // Set pixel with it's average color
             temp[i][j].rgbtBlue = round(rgbtBlueSum / neighbors);
             temp[i][j].rgbtGreen = round(rgbtGreenSum / neighbors);
             temp[i][j].rgbtRed = round(rgbtRedSum / neighbors);
         }
-    }
 
     // Replace each pixel of the original image with the ones of the temporary image
     for (int i = 0; i < height; i++)
-    {
         for (int j = 0; j < width; j++)
-        {
             image[i][j] = temp[i][j];
-        }
-    }
 
     return;
 }
@@ -114,7 +104,6 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
     // Loop through each pixel
     for (int i = 0; i < height; i++)
-    {
         for (int j = 0; j < width; j++)
         {
             GxRed = 0, GxGreen = 0, GxBlue = 0;
@@ -122,7 +111,6 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
             // Loop through the surrounding pixels of image[i][j]
             for (int k = -1; k < 2; k++)
-            {
                 for (int l = -1; l < 2; l++)
                 {
                     // Skip adjacent pixels that are out of the edges of the image
@@ -137,7 +125,6 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                         GyBlue += Gy[k + 1][l + 1] * image[i + k][j + l].rgbtBlue;
                     }
                 }
-            }
 
             redVal = round(sqrt(pow(GxRed, 2) + pow(GyRed, 2)));
             greenVal = round(sqrt(pow(GxGreen, 2) + pow(GyGreen, 2)));
@@ -147,16 +134,11 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             temp[i][j].rgbtGreen = (greenVal > 255) ? 255 : greenVal;
             temp[i][j].rgbtBlue = (blueVal > 255) ? 255 : blueVal;
         }
-    }
 
     // Replace each pixel of the original image with the ones of the temporary image
     for (int i = 0; i < height; i++)
-    {
         for (int j = 0; j < width; j++)
-        {
             image[i][j] = temp[i][j];
-        }
-    }
 
     return;
 }
